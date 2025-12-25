@@ -92,6 +92,8 @@
 }
 % Solves issues Warning: File `cv.out' has changed
 \RequirePackage{bookmark}
+% standardize bullets
+\RequirePackage{anyfontsize}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -192,6 +194,7 @@
 \newcommand*{\entryprojectlinkstyle}[1]{{\fontsize{7.2pt}{1em}\bodyfont\color{graytext} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{darktext} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\publicationstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\upshape\color{darktext} #1}}
 
 % For elements of subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
@@ -722,6 +725,31 @@
   \end{tabular*}
 }
 
+% Define an environment for cvpublication
+\newenvironment{cvpubs}{
+  \vspace{\acvSectionContentTopSkip - 2.0mm}
+  % \begin{center}
+  % \begin{justify}
+  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \raggedright
+    % \setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\raisebox{1pt}{\fontsize{6pt}{8pt}$\bullet$}}
+}{
+  % \end{center}
+  \end{itemize}
+  % \end{justify}
+}
+% Define an entry of cv information
+% Usage: \cvpub{<authors>}{<title>}
+\newcommand*{\cvpub}[5]{%
+  % \vspace{-2.0mm}
+  % \setlength\tabcolsep{0pt}
+  % \setlength{\extrarowheight}{0pt}
+  % \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth}}
+    \item \publicationstyle{#1. #2}
+  % \end{tabular*}%
+}
+
 % Define an environment for cvproject
 \newenvironment{cvprojects}{%
   \vspace{\acvSectionContentTopSkip}
@@ -791,7 +819,8 @@
   \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
     \raggedright
     \setlength{\parskip}{0pt}
-    \renewcommand{\labelitemi}{\bullet}
+    % \renewcommand{\labelitemi}{\bullet}
+    \renewcommand{\labelitemi}{\raisebox{1pt}{\fontsize{6pt}{8pt}$\bullet$}}
 }{%
   \end{itemize}
   \end{justify}
